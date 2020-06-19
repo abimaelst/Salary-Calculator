@@ -4,8 +4,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 50%;
+  
   border-radius: 8px;
+}
+
+.container img {
+  width: 153px;
+  height: 87px;
+  border-radius: 50%;
+  border: solid 2px white;
+  background-color: #21e6c1
 }
 
 .label__netSalary{
@@ -18,13 +26,13 @@
 }
 
 .label__netSalary{
-  color: #086972 !important;
+  /* color: #086972 !important; */
   font-weight: bold;
   
 }
 
 .header {
-  background: #a7ff83;
+  background: #c5e3f6;
   width: 100%;
   border-radius: 8px;
   color: #086972;
@@ -40,9 +48,7 @@
 }
 
 .bar {
-  background: yellow;
   width: 85%;
   height: 18px;
-  border-radius: 8px;
-  margin-left: 20px;
+  border-radius: 18px;
 }

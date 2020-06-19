@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import css from './app.module.css'
 
 export default class NetSalary extends Component {
   render() {
@@ -7,8 +6,8 @@ export default class NetSalary extends Component {
     return (
       <div className="row">
         <div className="input-field col s12">
-          <i className="material-icons prefix">local_atm</i>
-          <input disabled value={Number(netSalary).toFixed(2)} id="disabled" type="text" className={`validate ${css.label__netSalary}`} />
+          <i className="material-icons prefix">monetization_on</i>
+          <input disabled value={Number(netSalary).toFixed(2)} id="disabled" type="text" className="validate green-text" />
           <label htmlFor="disabled">Net Salary</label>
         </div>
       </div>

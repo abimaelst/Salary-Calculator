@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import css from '../components/app.module.css'
 
 export default class ProgressBar extends Component {
 
   render() {
-    const { percentInss, percentIrrf } = this.props
+    const { barInss, barIrrf } = this.props
     return (
-      <div className="progress green lighten-1 tooltipped">
-        <div className="determinate blue" style={{ width: `${percentInss + percentIrrf}%`, animation: "grow 2s" }}></div>
-        <div className="determinate red" style={{ width: `${percentInss}%`, animation: "grow 2s" }}></div>
+      <div className={`progress green lighten-1 tooltipped ${css.bar}`}>
+        <div className={`determinate blue ${css.bar}`} style={{ width: `${barInss + barIrrf}%`, animation: "grow 4s" }}></div>
+        <div className={`determinate red ${css.bar}`} style={{ width: `${barInss}%`, animation: "grow 4s" }}></div>
       </div>
     )
   }

@@ -8,8 +8,8 @@ export default class Salary extends Component {
   render() {
     return (
       <div className="row">
-        <div className="input-field col s12">
-          <i className="material-icons prefix">monetization_on</i>
+        <div className="input-field col s12 m12 l12">
+          <i className="material-icons prefix">create</i>
           <input id="icon_prefix" onChange={this.handleInputChange} type="number" className="validate" />
           <label htmlFor="icon_prefix">Salary</label>
         </div>

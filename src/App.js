@@ -4,6 +4,7 @@ import INSS from './components/INSS';
 import IRRF from './components/IRRF';
 import NetSalary from './components/NetSalary';
 import ProgressBar from './components/ProgressBar';
+import logo from './img/logo.png'
 
 import css from './components/app.module.css'
 
@@ -18,8 +19,10 @@ export default class App extends Component {
       irrfBase: 0,
       irrfDiscount: 0,
       netSalary: 0,
-      percentInss: 0,
-      percentIrrf: 0,
+      percentInss: '',
+      percentIrrf: '',
+      barInss: 0,
+      barIrrf: 0,
     }
   }
 
@@ -53,15 +56,26 @@ export default class App extends Component {
       inssBase -= 3134.4
       valueInssDiscout += (inssBase * 0.14) + 297.77
     }
+    if (inssBase > 6101.06) {
+      inssBase = 6101.06
+      valueInssDiscout += (inssBase * 0.14) + 297.77
+    }
 
-    // Aguarda o calculo do disconto de inss para calcular o disconto de IRRF
-
-    this.setState({
-      inssDiscount: valueInssDiscout,
-      irrfBase: irrfBase - valueInssDiscout,
-      percentInss: (valueInssDiscout / inssBaseFix) * 100
-    }, () => this.calculateIrrfDiscount(irrfBase, this.state.inssDiscount))
-
+    // Aguarda o calculo do disconto de inss para calcular o disconto de IRRF caso valor não seja vazio
+    if (inssBase === '' || inssBase === '0') {
+      this.setState({
+        percentInss: '',
+        inssDiscount: 0,
+        barInss: 0
+      })
+    } else {
+      this.setState({
+        inssDiscount: valueInssDiscout,
+        irrfBase: irrfBase - valueInssDiscout,
+        percentInss: `(${Number((valueInssDiscout / inssBaseFix) * 100).toFixed(2)}%)`,
+        barInss: Number((valueInssDiscout / inssBaseFix) * 100)
+      }, () => this.calculateIrrfDiscount(irrfBase, this.state.inssDiscount))
+    }
   }
 
   calculateIrrfDiscount = (irrfBase, inssDiscount) => {
@@ -84,18 +98,33 @@ export default class App extends Component {
 
     const { salary, netSalary } = this.state
 
-    this.setState({
-      irrfDiscount: valueIrrfDiscout,
-      percentIrrf: (valueIrrfDiscout / salary) * 100,
-      netSalary: netSalary - (valueIrrfDiscout + inssDiscount)
-    })
+    if (irrfBase < 1903.98) {
+      this.setState({
+        percentIrrf: '',
+        irrfBase: 0,
+        irrfDiscount: 0,
+        barIrrf: 0
+      })
+    } else {
+      this.setState({
+        irrfDiscount: valueIrrfDiscout,
+        percentIrrf: `(${Number((valueIrrfDiscout / salary) * 100).toFixed(2)}%)`,
+        barIrrf: (valueIrrfDiscout / salary) * 100,
+        netSalary: netSalary - (valueIrrfDiscout + inssDiscount)
+      })
+    }
   }
 
   render() {
-    const { inssBase, inssDiscount, irrfBase, irrfDiscount, netSalary, percentInss, percentIrrf } = this.state
+    const {
+      inssBase, inssDiscount, irrfBase,
+      irrfDiscount, netSalary, percentInss,
+      percentIrrf, barInss, barIrrf
+    } = this.state
     return (
       <div className={`container ${css.container}`}>
         <div className={`${css.header}`}>
+          <img src={logo} alt="logo" className="hide-on-small-only" />
           <h2 className={`${css.header__h2}`}>React Salary Calculator</h2>
         </div>
         <div className="row">
@@ -106,7 +135,7 @@ export default class App extends Component {
             <NetSalary netSalary={netSalary} />
           </form>
         </div>
-        <ProgressBar percentInss={percentInss} percentIrrf={percentIrrf} />
+        <ProgressBar barInss={barInss} barIrrf={barIrrf} />
       </div>
     )
   }
