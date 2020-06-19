@@ -1,0 +1,48 @@
+.container {
+  background-color: #e2f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  border-radius: 8px;
+}
+
+.label__netSalary{
+  color: #086972;
+  font-weight: bold;
+}
+
+.input-field label  {
+  color: #ff0;
+}
+
+.label__netSalary{
+  color: #086972 !important;
+  font-weight: bold;
+  
+}
+
+.header {
+  background: #a7ff83;
+  width: 100%;
+  border-radius: 8px;
+  color: #086972;
+  font-family: 'Nunito', 'Ubuntu';
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__h2 {
+  margin-bottom: 40px;
+}
+
+.bar {
+  background: yellow;
+  width: 85%;
+  height: 18px;
+  border-radius: 8px;
+  margin-left: 20px;
+}
