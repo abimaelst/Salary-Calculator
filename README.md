@@ -2,7 +2,7 @@
 
 ## Objectives
 
-Create, using React, an application named 'react-salario' that should be able to calculate the net salary from gross salary, considering the 2020 CLT rules.
+Create, using React, an application named 'react-salary' that should be able to calculate the net salary from gross salary, considering the 2020 CLT rules.
 
 To exercise some concepts as:
 
