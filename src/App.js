@@ -57,8 +57,7 @@ export default class App extends Component {
       valueInssDiscout += (inssBase * 0.14) + 297.77
     }
     if (inssBase > 6101.06) {
-      inssBase = 6101.06
-      valueInssDiscout += (inssBase * 0.14) + 297.77
+      valueInssDiscout = 713.10
     }
 
     // Aguarda o calculo do disconto de inss para calcular o disconto de IRRF caso valor não seja vazio
@@ -73,7 +72,8 @@ export default class App extends Component {
         inssDiscount: valueInssDiscout,
         irrfBase: irrfBase - valueInssDiscout,
         percentInss: `(${Number((valueInssDiscout / inssBaseFix) * 100).toFixed(2)}%)`,
-        barInss: Number((valueInssDiscout / inssBaseFix) * 100)
+        barInss: Number((valueInssDiscout / inssBaseFix) * 100),
+        netSalary: inssBaseFix - valueInssDiscout
       }, () => this.calculateIrrfDiscount(irrfBase, this.state.inssDiscount))
     }
   }
@@ -100,7 +100,7 @@ export default class App extends Component {
 
     if (irrfBase < 1903.98) {
       this.setState({
-        percentIrrf: '',
+        percentIrrf: ' ',
         irrfBase: 0,
         irrfDiscount: 0,
         barIrrf: 0
@@ -110,7 +110,7 @@ export default class App extends Component {
         irrfDiscount: valueIrrfDiscout,
         percentIrrf: `(${Number((valueIrrfDiscout / salary) * 100).toFixed(2)}%)`,
         barIrrf: (valueIrrfDiscout / salary) * 100,
-        netSalary: netSalary - (valueIrrfDiscout + inssDiscount)
+        netSalary: netSalary - valueIrrfDiscout
       })
     }
   }
@@ -124,8 +124,8 @@ export default class App extends Component {
     return (
       <div className={`container ${css.container}`}>
         <div className={`${css.header}`}>
-          <img src={logo} alt="logo" className="hide-on-small-only" />
-          <h2 className={`${css.header__h2}`}>React Salary Calculator</h2>
+          <img src={logo} alt="logo" className="center hide-on-small-only" />
+          <h2 className={`center ${css.header__h2}`}>React Salary Calculator</h2>
         </div>
         <div className="row">
           <form className="col center s12">
